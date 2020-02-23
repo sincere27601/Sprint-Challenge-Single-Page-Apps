@@ -1,8 +1,13 @@
+// React
 import React, { useState } from "react";
 import Axios from "axios";
+
+// Local
 import CharacterCard from "./CharacterCard";
 import EpisodeCard from "./EpisodeCard";
 import LocationCard from "./LocationCard";
+
+// Material UI
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,14 +17,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 
-export default function SearchForm() {
- 
-  return (
-    <section className="search-form">
-     // Add a search form here
-    </section>
-  );
-}
 const useStyles = makeStyles({
   list: {
     width: "auto",
@@ -34,7 +31,7 @@ const useStyles = makeStyles({
 });
 
 export default function SearchForm(props) {
-  
+  // TODO: Add stateful logic for query/form data
   const classes = useStyles();
 
   const [drawer, setDrawer] = useState({ right: false });
@@ -90,49 +87,46 @@ export default function SearchForm(props) {
         setResponse(res.data.results);
       })
       .catch(err => console.log(err));
-    };
-       
-       return (
-    <section className="search-form">
-      <form onSubmit={e => queryAPI(e)}>
-        <Select
-          className="category"
-          name="category"
-          placeholder="Select Category"
-          value={category}
-          onChange={e => setCategory(e.target.value)}
-        >
-          <MenuItem value="character">Character</MenuItem>
-          <MenuItem value="location">Location</MenuItem>
-          <MenuItem values="episode">Episode</MenuItem>
-        </Select>
-        <TextField
-          className="query"
-          onChange={e => setQuery(e.target.value)}
-          placeholder="name"
-          value={query}
-          name="query"
-        />
-        <Button
-          type="submit"
-          className="informationFAB"
-          onClick={toggleDrawer("right", true)}
-        >
-          <Icon>search</Icon>
-        </Button>
-      </form>
-    </section>
-    
-       ); export default class App extends React.Component {
-       render() {
-         return (
-         <Drawer
-           anchor="right"
-           open={drawer.right}
-           onClose={toggleDrawer("right", false)}>
-           {sideList("right")}
-         </Drawer>
-       )}
+  };
 
-         }
-        }
+  return (
+    <>
+      <section className="search-form">
+        <form onSubmit={e => queryAPI(e)}>
+          <Select
+            className="category"
+            name="category"
+            placeholder="Select Category"
+            value={category}
+            onChange={e => setCategory(e.target.value)}
+          >
+            <MenuItem value="character">Character</MenuItem>
+            <MenuItem value="location">Location</MenuItem>
+            <MenuItem values="episode">Episode</MenuItem>
+          </Select>
+          <TextField
+            className="query"
+            onChange={e => setQuery(e.target.value)}
+            placeholder="name"
+            value={query}
+            name="query"
+          />
+          <Button
+            type="submit"
+            className="informationFAB"
+            onClick={toggleDrawer("right", true)}
+          >
+            <Icon>search</Icon>
+          </Button>
+        </form>
+      </section>
+      <Drawer
+        anchor="right"
+        open={drawer.right}
+        onClose={toggleDrawer("right", false)}
+      >
+        {sideList("right")}
+      </Drawer>
+    </>
+  );
+}
