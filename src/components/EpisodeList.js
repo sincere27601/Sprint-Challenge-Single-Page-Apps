@@ -1,34 +1,53 @@
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Card } from 'semantic-ui-react'
+import React, { useEffect, useState } from "react";
+import { Link, Route } from "react-router-dom";
+import Axios from "axios";
+import Icon from "@material-ui/core/Icon";
+
+import EpisodeCard from "./EpisodeCard";
 
 export default function EpisodesList() {
     // TODO: Add useState to track data from useEffect
-    //episodes will be stored in an array 
-    const [episodes, setEpisodes] = useState([])
+    const [episodes, setEpisodes] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+
     useEffect(() => {
         // TODO: Add AJAX/API Request here - must run in `useEffect`
-        //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-        axios
-            .get(`https://rickandmortyapi.com/api/episode/`)
-            .then(response => { setEpisodes(response.data.results) })
-            .catch(error => console.log('Unexpected Error: ', error))
-    }, [])//Cannot add anything to the dependency array as then useEffect will perform API requests to check if episodes changed and hit API limit.
+        // Setup dynamic refreshing later using page 2 nav (See Starwars Project)
+        setLoading(true);
+        Axios.get(`https://rickandmortyapi.com/api/episode/?page=${page}`)
+            .then(res => {
+                setEpisodes(res.data.results);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+                setLoading(false);
+            });
+    }, [page]);
+    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
 
-    return <section className="episode-list grid-view">
-        {episodes.map((episode, index) =>
-            <Card key={index}>
-                <Card.Content>
-                    <Card.Header>{episode.name}</Card.Header>
-                    <Card.Meta>
-                        <span className='date'>Air date: {episode.air_date}</span>
-                    </Card.Meta>
-                    <Card.Description>
-                        Episode Tag:{episode.episode}
-                    </Card.Description>
-                </Card.Content>
-            </Card>
-        )}
-    </section>
-} 
+    const pageUp = () => {
+        return page < 2 ? setPage(page + 1) : null;
+    };
+    const pageDown = () => {
+        return page > 1 ? setPage(page - 1) : null;
+    };
+
+    return (
+        <section className="character-list grid-view">
+            <button className="ButtonDown" onClick={pageDown}>
+                <Icon>keyboard_arrow_left</Icon>
+            </button>
+            <div className="CardHolder">
+                {episodes.map((episode, index) => {
+                    return <EpisodeCard key={index} episode={episode} />;
+                })}
+            </div>
+            <button className="ButtonUp" onClick={pageUp}>
+                <Icon>keyboard_arrow_right</Icon>
+            </button>
+        </section>
+    );
+}
