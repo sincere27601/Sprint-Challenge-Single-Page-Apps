@@ -1,0 +1,20 @@
+{
+    "type": "npm",
+    "script": "watch",
+    "problemMatcher": "$tsc-watch",
+    "isBackground": true,
+    "presentation": {
+        "reveal": "never"
+    },
+    "group": {
+        "kind": "build",
+        "isDefault": true
+    },
+    // Force this to use WSL with no additional arguments
+    "options": {
+        "shell": {
+            "executable": "C:\\WINDOWS\\System32\\wsl.exe"
+        },
+        "args": []
+    }
+}
