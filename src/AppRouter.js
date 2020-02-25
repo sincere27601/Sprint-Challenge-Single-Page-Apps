@@ -5,7 +5,7 @@ import WelcomePage from './WelcomePage';
 import LocationsList from './LocationsList';
 import EpisodesList from './EpisodesList';
 import SearchForm from './SearchForm';
-
+//search form component
 export default function AppRouter() {
     return <div className="page-view ui bottom attached segment active tab">
         <Switch>

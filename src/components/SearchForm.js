@@ -26,16 +26,14 @@ const useStyles = makeStyles({
     width: "500px"
   }
 });
-
+// Added SearchForm Component
 export default function SearchForm(props) {
-  // TODO: Add stateful logic for query/form data
   const classes = useStyles();
-
   const [drawer, setDrawer] = useState({ right: false });
   const [category, setCategory] = useState("character");
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState([]);
-
+   
   const toggleDrawer = (side, open) => event => {
     if (
       event.type === "keydown" &&
@@ -56,9 +54,8 @@ export default function SearchForm(props) {
       onKeyDown={() => {
         toggleDrawer(side, false);
       }}
-    >
+    > //Filter for Search form through Character list
       <div className="response" styles={classes.list}>
-        {/* TODO: This works once, but if you change the category to search again, it will fail. Must find a better thing to conditionally tie this JSX to. */}
         {category == "character" &&
           response.map((response, index) => {
             return (

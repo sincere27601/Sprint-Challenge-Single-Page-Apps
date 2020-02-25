@@ -1,16 +1,17 @@
+
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
 import Icon from "@material-ui/core/Icon";
-import { MakeStyles } from "reactstrap";
-import { Card } from 'cards';
-
-import { CardActionArea } from "./component/CardActionArea";
-import { CardMedia } from "cardmedia";
-import { CardContent } from "cardcontent"; 
 import React from 'react' 
 
-const useStyles = MakeStyles({
+const useStyles = makeStyles({
   card: {
     maxWidth: 345,
     margin: "20px"
@@ -30,7 +31,7 @@ export default function CharacterCard({ character }) {
     <Card className={`${classes.card} CardContainer`}>
       <CardActionArea
         onClick={() =>
-          alert("This would give you a full snapshot of the characters.")
+          alert("characters")
         }
       >
         <CardMedia
@@ -53,3 +54,4 @@ export default function CharacterCard({ character }) {
     </Card>
   );
 }
+

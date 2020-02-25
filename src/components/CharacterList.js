@@ -6,13 +6,14 @@ import Icon from "@material-ui/core/Icon";
 import CharacterCard from "./CharacterCard";
 
 export default function CharacterList() {
-  // TODO: Add useState to track data from useEffect
+  
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+
+  //Fetched character by making API call.
   useEffect(() => {
-    // Setup dynamic refreshing later using page 2 nav (See Starwars Project)
     setLoading(true);
     Axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`)
       .then(res => {
@@ -25,8 +26,7 @@ export default function CharacterList() {
       });
   }, [page]);
 
-  //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-
+  //Manipulating the DOM
   const pageUp = () => {
     return page < 25 ? setPage(page + 1) : null;
   };

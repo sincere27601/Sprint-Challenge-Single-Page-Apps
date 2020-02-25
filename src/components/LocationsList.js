@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, Route } from "react-router-dom";
 import Axios from "axios";
 import Icon from "@material-ui/core/Icon";
-
 import LocationCard from "./LocationCard";
 
 export default function LocationList() {
